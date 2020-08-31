@@ -1,0 +1,37 @@
+type Token @entity {
+  id: ID!
+  name: String!
+  symbol: String!
+  decimals: Int!
+  address: Bytes!
+  totalSupply: BigDecimal
+  maxSupply: BigInt
+  holdersCount: BigInt
+  holders: [Holder!] @derivedFrom(field: "token")
+}
+
+type Holder @entity{
+  id: ID!
+  balanceRaw: BigInt!
+  balance: BigDecimal!
+  token : Token!
+}
+
+type Transfer @entity {
+  id: ID!
+  timestamp: BigInt!
+  blockNumber: BigInt!
+  value: BigDecimal!
+  from: Bytes
+  to: Bytes
+  gasPrice: BigInt
+  gasUsed: BigInt
+}
+
+type Transaction @entity{
+  id: ID!
+  timestamp: BigInt!
+  blockNumber: BigInt!
+  from: Bytes
+  to: Bytes
+}
